@@ -1,4 +1,0 @@
-FROM centos:7
-RUN yum update && yum install -y openstack-nova-api
-EXPOSE 8774
-CMD ["/usr/bin/systemctl", "start", "openstack-nova-api.service "]

@@ -1,3 +1,0 @@
-FROM centos:7
-RUN yum update && yum install -y openstack-nova-conductor
-CMD ["/usr/bin/systemctl", "start", "openstack-nova-conductor.service"]
