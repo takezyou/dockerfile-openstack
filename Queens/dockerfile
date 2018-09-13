@@ -1,26 +1,11 @@
 FROM centos:7
 
-MAINTAINER Admin <admin@admin.com>
+MAINTAINER KaitoAkita <kaitokun07@icloud.com>
 
 # Queens
 RUN yum update & yum -y install centos-release-openstack-queens
 RUN sed -i -e "s/enabled=1/enabled=0/g" /etc/yum.repos.d/CentOS-OpenStack-queens.repo
+RUN  yum -y install centos-release-openstack-queens epel-release
+RUN  yum -y install openstack-packstack python-pip
 
-# keystone
-RUN yum --enablerepo=centos-openstack-queens,epel -y install openstack-keystone openstack-utils python-openstackclient httpd mod_wsgi
-
-# glance
-RUN yum --enablerepo=centos-openstack-queens,epel -y install openstack-glance
-
-# nova
-RUN yum --enablerepo=centos-openstack-queens,epel -y install openstack-nova
-RUN yum --enablerepo=centos-openstack-queens,epel -y install openstack-nova-compute
-
-# neutron
-RUN yum --enablerepo=centos-openstack-queens,epel -y install openstack-neutron openstack-neutron-ml2 openstack-neutron-openvswitch
-
-# rabbit and memcached
-RUN yum --enablerepo=epel -y install rabbitmq-server memcached
-
-RUN systemctl enable rabbitmq-server memcached 
-CMD [systemctl start rabbitmq-server memcached]
+CMD [packstack --allinone]

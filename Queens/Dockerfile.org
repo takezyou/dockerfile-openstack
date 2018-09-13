@@ -1,0 +1,28 @@
+
+FROM centos:7
+
+MAINTAINER KaitoAkita <kaitokun07@icloud.com>
+
+# Queens
+RUN yum update & yum -y install centos-release-openstack-queens
+RUN sed -i -e "s/enabled=1/enabled=0/g" /etc/yum.repos.d/CentOS-OpenStack-queens.repo
+
+# keystone
+RUN yum --enablerepo=centos-openstack-queens,epel -y install openstack-keystone openstack-utils python-openstackclient httpd mod_wsgi
+
+# nova
+RUN yum --enablerepo=centos-openstack-queens,epel -y install openstack-nova
+
+# neutron
+RUN yum --enablerepo=centos-openstack-queens,epel -y install openstack-neutron
+
+# rabbit and memcached
+RUN yum --enablerepo=epel -y install rabbitmq-server memcached
+
+RUN systemctl enable rabbitmq-server memcached httpd openstack-nova-api \
+    openstack-nova-consoleauth openstack-nova-conductor openstack-nova-scheduler \
+    openstack-nova-novncproxy neutron-server
+
+CMD [systemctl start rabbitmq-server memcached httpd openstack-nova-api \
+     openstack-nova-consoleauth openstack-nova-conductor openstack-nova-scheduler \
+     openstack-nova-novncproxy neutron-server]
