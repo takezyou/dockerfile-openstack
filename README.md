@@ -21,3 +21,9 @@ $ minikube status
 ```
 $ minikube service list
 ```
+
+## Deployment Excute
+
+```
+$ kubectl apply -f k8s/queens-deployment.yaml
+```

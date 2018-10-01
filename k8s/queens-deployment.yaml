@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: openstack-queens
+spec:
+  replicas: 2
+  template:
+    metadata:
+     labels:
+       app: openstack-queens
+    spec:
+      containers:
+        - image: ../Queens:1.0
+          name: queens

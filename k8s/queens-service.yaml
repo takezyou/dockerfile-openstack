@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: queens-service
+spec:
+  type: NodePort
+  ports:
+  - protocol: 
