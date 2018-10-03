@@ -27,3 +27,9 @@ $ minikube service list
 ```
 $ kubectl apply -f k8s/queens-deployment.yaml
 ```
+
+## Show Deployment,Pod,replicaset
+
+```
+kubectl get deployment,replicaset,pod -o wide
+```

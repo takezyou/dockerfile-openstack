@@ -10,5 +10,5 @@ spec:
        app: openstack-queens
     spec:
       containers:
-        - image: ../Queens:1.0
+        - image: takezyou/k8s-queens:latest 
           name: queens
